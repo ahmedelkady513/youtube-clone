@@ -1,1 +1,1 @@
-API/src/main/resources/application.properties
+API/src/main/java/com/videohosting/elkady/youtubeclone/config/AWSConfig.java
