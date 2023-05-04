@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 
 @RestController
-@RequestMapping("/api/videos")
+@RequestMapping("api/videos")
 @RequiredArgsConstructor
 public class VideoController {
     

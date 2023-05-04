@@ -27,20 +27,20 @@ public class S3Service implements FileService {
     public String uploadFile(MultipartFile file) {
         var fileExtension = StringUtils.getFilenameExtension(file.getOriginalFilename());
 
-        var key = UUID.randomUUID().toString() + fileExtension;
+        var key = UUID.randomUUID().toString() + "." + fileExtension;
 
         var metadata = new ObjectMetadata();
         metadata.setContentLength(file.getSize());
         metadata.setContentType(file.getContentType());
 
         try {
-            amazonS3Client.putObject("BUCKET_NAME", key, file.getInputStream(), metadata);
+            amazonS3Client.putObject(BUCKET_NAME, key, file.getInputStream(), metadata);
         } catch (IOException exception) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "An exception occured  while uploading the file");
         }
 
-        amazonS3Client.setObjectAcl("BUCKET_NAME", key, CannedAccessControlList.PublicRead);
+        amazonS3Client.setObjectAcl(BUCKET_NAME, key, CannedAccessControlList.PublicRead);
 
-        return amazonS3Client.getResourceUrl("BUCKET_NAME", key);
+        return amazonS3Client.getResourceUrl(BUCKET_NAME, key);
     }
 }
